@@ -1,4 +1,5 @@
 <x-guest-layout>
+    <div class="container bg-gray-50 mt-36 dark:bg-gray-700 rounded-lg shadow-md mx-auto px-6 py-8">
     <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
         {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
     </div>
@@ -26,6 +27,7 @@
             <button type="submit" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
                 {{ __('Log Out') }}
             </button>
-        </form>
+            </form>
+        </div>
     </div>
 </x-guest-layout>

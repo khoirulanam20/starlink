@@ -2,11 +2,10 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <form class ="container bg-gray-50 mt-36 dark:bg-gray-700 rounded-lg shadow-md mx-auto px-6 py-8" method="POST" action="{{ route('login') }}">
         @csrf
-
         <!-- Email Address & Username -->
-        <div>
+        <div >
             <x-input-label for="id_user" :value="__('Email or Username')" />
             <x-text-input id="id_user" class="block mt-1 w-full" type="text" name="id_user" :value="old('id_user')" 
             required autofocus autocomplete="id_user" />

@@ -1,55 +1,31 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form action="{{ route('pembayaran.store') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div>
-                            <x-input-label for="email_registered" :value="__('Email Registered')" />
-                            <x-text-input id="email_registered" name="email_registered" type="email" class="mt-1 block w-full" required />
-                            <x-input-error class="mt-2" :messages="$errors->get('email_registered')" />
-                        </div>
-                        <div>
-                            <x-input-label for="billing_period_start" :value="__('Billing Period Start')" />
-                            <x-text-input id="billing_period_start" name="billing_period_start" type="date" class="mt-1 block w-full" required />
-                            <x-input-error class="mt-2" :messages="$errors->get('billing_period_start')" />
-                        </div>
-                        <div>
-                            <x-input-label for="billing_period_end" :value="__('Billing Period End')" />
-                            <x-text-input id="billing_period_end" name="billing_period_end" type="date" class="mt-1 block w-full" required />
-                            <x-input-error class="mt-2" :messages="$errors->get('billing_period_end')" />
-                        </div>
-                        <div>
-                            <x-input-label for="due_date" :value="__('Due Date')" />
-                            <x-text-input id="due_date" name="due_date" type="date" class="mt-1 block w-full" required />
-                            <x-input-error class="mt-2" :messages="$errors->get('due_date')" />
-                        </div>
-                        <div>
-                            <x-input-label for="invoice" :value="__('Invoice (PDF)')" />
-                            <x-text-input id="invoice" name="invoice" type="file" class="mt-1 block w-full" required />
-                            <x-input-error class="mt-2" :messages="$errors->get('invoice')" />
-                        </div>
-                        <div>
-                            <x-input-label for="status" :value="__('Status')" />
-                            <select id="status" name="status" class="mt-1 block w-full" required>
-                                <option value="unpaid">Unpaid</option>
-                                <option value="paid">Paid</option>
-                            </select>
-                            <x-input-error class="mt-2" :messages="$errors->get('status')" />
-                        </div>
-                        <div class="flex items-center gap-4 mt-4">
-                            <x-primary-button>{{ __('Save') }}</x-primary-button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <div class="container bg-gray-50 mt-10 dark:bg-gray-700 rounded-lg shadow-md mx-auto px-6 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Pembayaran</h1>
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y mt-4 divide-gray-200">
+                <thead class="bg-gray-100 dark:bg-gray-800">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Email Registered</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Billing Period Start</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Billing Period End</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Due Date</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Invoice</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+                    @foreach ($pembayarans as $pembayaran)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $pembayaran->email_registered }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $pembayaran->billing_period_start }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $pembayaran->billing_period_end }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $pembayaran->due_date }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap  text-blue-500 hover:text-white"><a href="{{ Storage::url($pembayaran->invoice) }}" target="_blank">View Invoice</a></td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $pembayaran->status }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </x-app-layout>
